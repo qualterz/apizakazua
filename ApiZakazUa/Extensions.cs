@@ -2,6 +2,12 @@ using ApiZakazUa.Records;
 
 namespace ApiZakazUa.Extensions;
 
+/// <summary>
+/// High-level methods for wrapper
+/// </summary>
+/// <remarks>
+/// Methods of this class are not optimized, so you may get cooldown due to `too many requests` error
+/// </remarks>
 public static class WrapperExtensions
 {
     public static IReadOnlySet<Category>? GetCategories(this ApiWrapper wrapper)
