@@ -3,37 +3,88 @@ using RestSharp;
 
 namespace ApiZakazUa;
 
-public class ApiWrapper : IApiWrapper
+public class ApiWrapper
 {
     readonly RestClient client;
+
 
     public ApiWrapper()
     {
         client = new RestClient("https://stores-api.zakaz.ua");
     }
 
-    public List<Category> GetCategories(int StoreId)
+    public IReadOnlySet<Category>? GetCategories(int storeId)
     {
-        throw new NotImplementedException();
+        return client.GetJson<HashSet<Category>>($"stores/{storeId}/categories");
     }
 
-    public List<Category> GetCategories()
+    public IReadOnlySet<Category>? GetCategories()
     {
-        throw new NotImplementedException();
+        var stores = GetStores();
+
+        if (stores == null)
+            return null;
+
+        var result = new HashSet<Category>();
+
+        var storeIds = stores.Select(d => d.Id);
+        foreach (var id in storeIds) 
+        {
+            var categories = GetCategories(id);
+            if (categories != null)
+                result.UnionWith(categories);
+        }
+
+        if (result.Any()) return result; else return null;
     }
 
-    public List<Product> GetProducts(int CategoryId)
+    public IReadOnlySet<Product>? GetProducts(int storeId, string categoryId)
     {
-        throw new NotImplementedException();
+        return client.GetJson<Products>($"stores/{storeId}/categories/{categoryId}/products")?.Results.ToHashSet();
     }
 
-    public List<Product> GetProducts()
+    public IReadOnlySet<Product>? GetProducts(int storeId)
     {
-        throw new NotImplementedException();
+        var categories = GetCategories(storeId);
+        if (categories == null)
+            return null;
+
+        var result = new HashSet<Product>();
+
+        var categoryIds = categories.Select(d => d.Id);
+        foreach (var id in categoryIds)
+        {
+            var products = GetProducts(storeId, id);
+
+            if (products != null)
+                result.UnionWith(products);
+        }
+
+        if (result.Any()) return result; else return null;
     }
 
-    public List<Store> GetStores()
+    public IReadOnlySet<Product>? GetProducts()
     {
-        return client.GetJson<List<Store>>("stores");
+        var stores = GetStores();
+        if (stores == null)
+            return null;
+
+        var result = new HashSet<Product>();
+
+        var storeIds = stores.Select(d => d.Id);
+        foreach (var id in storeIds)
+        {
+            var products = GetProducts(id);
+
+            if (products != null)
+                result.UnionWith(products);
+        }
+
+        if (result.Any()) return result; else return null;
+    }
+
+    public IReadOnlySet<Store>? GetStores()
+    {
+        return client.GetJson<List<Store>>("stores")?.ToHashSet();
     }
 }

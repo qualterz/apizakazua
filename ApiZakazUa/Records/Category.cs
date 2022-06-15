@@ -9,7 +9,6 @@ public record Category(
     [property: JsonPropertyName("children")] IReadOnlyList<Category> Children,
     [property: JsonPropertyName("description")] object Description,
     [property: JsonPropertyName("image_url")] string ImageUrl,
-    [property: JsonPropertyName("is_popular")] bool IsPopular,
     [property: JsonPropertyName("is_collection")] bool IsCollection,
     [property: JsonPropertyName("parent_id")] object ParentId
 );

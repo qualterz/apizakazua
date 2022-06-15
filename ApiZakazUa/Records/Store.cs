@@ -14,7 +14,7 @@ public record OpeningHours(
 );
 
 public record Store(
-    [property: JsonPropertyName("id")] string Id,
+    [property: JsonPropertyName("id")] int Id,
     [property: JsonPropertyName("name")] string Name,
     [property: JsonPropertyName("retail_chain")] string RetailChain,
     [property: JsonPropertyName("region_id")] string RegionId,
