@@ -34,6 +34,6 @@ public class ApiWrapper : IApiWrapper
 
     public List<Store> GetStores()
     {
-        return client.GetJson<List<Store>>("stores") ?? new List<Store>();
+        return client.GetJson<List<Store>>("stores");
     }
 }
