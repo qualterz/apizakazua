@@ -3,7 +3,7 @@ using RestSharp;
 
 namespace ApiZakazUa;
 
-public class ApiWrapper
+public partial class ApiWrapper
 {
     readonly RestClient client;
 
