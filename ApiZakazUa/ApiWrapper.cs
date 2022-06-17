@@ -1,4 +1,4 @@
-﻿using ApiZakazUa.Records;
+﻿using ApiZakazUa.Resources;
 using RestSharp;
 
 namespace ApiZakazUa;

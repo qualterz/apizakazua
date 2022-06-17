@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace ApiZakazUa.Records;
+namespace ApiZakazUa.Resources;
 
 public record Discount(
     [property: JsonPropertyName("status")] bool Status,

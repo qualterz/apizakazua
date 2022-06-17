@@ -1,4 +1,4 @@
-﻿using ApiZakazUa.Records;
+﻿using ApiZakazUa.Resources;
 
 namespace ApiZakazUa;
 

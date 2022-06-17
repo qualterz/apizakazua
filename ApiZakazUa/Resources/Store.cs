@@ -1,4 +1,4 @@
-namespace ApiZakazUa.Records;
+namespace ApiZakazUa.Resources;
 
 using System.Text.Json.Serialization;
 
