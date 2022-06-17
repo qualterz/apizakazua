@@ -10,7 +10,7 @@ namespace ApiZakazUa.Extensions;
 /// </remarks>
 public static class WrapperExtensions
 {
-    public static IReadOnlySet<Category>? GetCategories(this ApiWrapper wrapper)
+    public static IReadOnlySet<Category>? GetCategories(this Client wrapper)
     {
         var stores = wrapper.GetStores();
 
@@ -20,7 +20,7 @@ public static class WrapperExtensions
         var result = new HashSet<Category>();
 
         var storeIds = stores.Select(d => d.Id);
-        foreach (var id in storeIds) 
+        foreach (var id in storeIds)
         {
             var categories = wrapper.GetCategories(id);
             if (categories != null)
@@ -30,7 +30,7 @@ public static class WrapperExtensions
         if (result.Any()) return result; else return null;
     }
 
-    public static IReadOnlySet<Product>? GetProducts(this ApiWrapper wrapper, int storeId)
+    public static IReadOnlySet<Product>? GetProducts(this Client wrapper, int storeId)
     {
         var categories = wrapper.GetCategories(storeId);
         if (categories == null)
@@ -50,7 +50,7 @@ public static class WrapperExtensions
         if (result.Any()) return result; else return null;
     }
 
-    public static IReadOnlySet<Product>? GetProducts(this ApiWrapper wrapper)
+    public static IReadOnlySet<Product>? GetProducts(this Client wrapper)
     {
         var stores = wrapper.GetStores();
         if (stores == null)

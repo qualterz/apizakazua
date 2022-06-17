@@ -2,7 +2,7 @@
 
 namespace ApiZakazUa;
 
-public partial class ApiWrapper
+public partial class Client
 {
     public Task<IReadOnlySet<Category>?> GetCategoriesAsync(int storeId)
     {

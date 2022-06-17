@@ -3,11 +3,11 @@ using RestSharp;
 
 namespace ApiZakazUa;
 
-public partial class ApiWrapper
+public partial class Client
 {
     readonly RestClient client;
 
-    public ApiWrapper()
+    public Client()
     {
         client = new RestClient("https://stores-api.zakaz.ua");
     }
