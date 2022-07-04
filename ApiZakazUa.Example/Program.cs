@@ -2,11 +2,11 @@
 using ApiZakazUa.Extensions;
 using static ApiZakazUa.Examples.Util;
 
-var wrapper = new ApiWrapper();
+var client = new Client();
 
 // Get set of retail chains
 {
-    var retailChains = wrapper.GetStores()?
+    var retailChains = client.GetStores()?
                               .Select(d => d.RetailChain)
                               .Distinct();
 
@@ -17,7 +17,7 @@ var wrapper = new ApiWrapper();
 
 // Get all existing categories
 {
-    var existingCategories = wrapper.GetCategories()?
+    var existingCategories = client.GetCategories()?
                                     .Select(d => d.Title)
                                     .Distinct();
 
@@ -28,7 +28,7 @@ var wrapper = new ApiWrapper();
 
 // Get products from all stores
 {
-    var allProducts = wrapper.GetProducts()?
+    var allProducts = client.GetProducts()?
                              .Select(d => d.Title)
                              .Distinct();
     
