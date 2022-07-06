@@ -10,4 +10,15 @@
     <PackageReference Include="RestSharp" Version="108.0.1" />
   </ItemGroup>
 
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <PackageId>ApiZakazUa</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>qualterz</Authors>
+    <Company>PricesInUa</Company>
+    <PackageDescription>Web API wrapper for Zakaz.ua platform</PackageDescription>
+    <RepositoryUrl>https://github.com/pricesinua/ApiZakazUa</RepositoryUrl>
+  </PropertyGroup>
+
 </Project>
