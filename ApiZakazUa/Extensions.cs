@@ -10,9 +10,9 @@ namespace ApiZakazUa.Extensions;
 /// </remarks>
 public static class WrapperExtensions
 {
-    public static IReadOnlySet<Category>? GetCategories(this Client wrapper)
+    public static IReadOnlySet<Category>? GetCategories(this Client client)
     {
-        var stores = wrapper.GetStores();
+        var stores = client.GetStores();
 
         if (stores == null)
             return null;
@@ -22,7 +22,7 @@ public static class WrapperExtensions
         var storeIds = stores.Select(d => d.Id);
         foreach (var id in storeIds)
         {
-            var categories = wrapper.GetCategories(id);
+            var categories = client.GetCategories(id);
             if (categories != null)
                 result.UnionWith(categories);
         }
@@ -30,9 +30,9 @@ public static class WrapperExtensions
         if (result.Any()) return result; else return null;
     }
 
-    public static IReadOnlySet<Product>? GetProducts(this Client wrapper, int storeId)
+    public static IReadOnlySet<Product>? GetProducts(this Client client, int storeId)
     {
-        var categories = wrapper.GetCategories(storeId);
+        var categories = client.GetCategories(storeId);
         if (categories == null)
             return null;
 
@@ -41,7 +41,7 @@ public static class WrapperExtensions
         var categoryIds = categories.Select(d => d.Id);
         foreach (var id in categoryIds)
         {
-            var products = wrapper.GetProducts(storeId, id);
+            var products = client.GetProducts(storeId, id);
 
             if (products != null)
                 result.UnionWith(products);
@@ -50,9 +50,9 @@ public static class WrapperExtensions
         if (result.Any()) return result; else return null;
     }
 
-    public static IReadOnlySet<Product>? GetProducts(this Client wrapper)
+    public static IReadOnlySet<Product>? GetProducts(this Client client)
     {
-        var stores = wrapper.GetStores();
+        var stores = client.GetStores();
         if (stores == null)
             return null;
 
@@ -61,7 +61,7 @@ public static class WrapperExtensions
         var storeIds = stores.Select(d => d.Id);
         foreach (var id in storeIds)
         {
-            var products = wrapper.GetProducts(id);
+            var products = client.GetProducts(id);
 
             if (products != null)
                 result.UnionWith(products);
