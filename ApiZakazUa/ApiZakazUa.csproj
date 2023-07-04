@@ -14,7 +14,7 @@
     <Authors>qualterz</Authors>
     <Company>PricesInUa</Company>
     <PackageDescription>Web API wrapper for Zakaz.ua platform</PackageDescription>
-    <RepositoryUrl>https://github.com/pricesinua/ApiZakazUa</RepositoryUrl>
+    <RepositoryUrl>https://github.com/qualterz/apizakazua</RepositoryUrl>
   </PropertyGroup>
 
 </Project>
