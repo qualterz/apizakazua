@@ -1,20 +1,16 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="RestSharp" Version="108.0.1" />
-  </ItemGroup>
-
   <PropertyGroup>
     <OutputType>Library</OutputType>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
     <PackageId>ApiZakazUa</PackageId>
-    <Version>1.0.1</Version>
+    <Version>2.0.0-rc</Version>
     <Authors>qualterz</Authors>
     <Company>PricesInUa</Company>
     <PackageDescription>Web API wrapper for Zakaz.ua platform</PackageDescription>

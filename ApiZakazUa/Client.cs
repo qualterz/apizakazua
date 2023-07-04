@@ -1,29 +1,59 @@
-﻿using ApiZakazUa.Resources;
-using RestSharp;
+﻿using System.Collections;
+using System.Net.Http.Json;
+using ApiZakazUa.Resources;
 
 namespace ApiZakazUa;
 
-public partial class Client
+public class HttpClientWrapper
 {
-    readonly RestClient client;
+    public const string DefaultBaseAddress = "https://stores-api.zakaz.ua";
 
-    public Client()
+    public const string StoresEndpoint = "stores";
+    public const string StoreCategoriesEndpoint = "stores/{0}/categories";
+    public const string StoreCategoryProductsEndpoint = "stores/{0}/categories/{1}/products";
+
+    public HttpClient HttpClient { get; set; }
+    public Uri? BaseAddress => HttpClient.BaseAddress;
+
+    public HttpClientWrapper(Uri baseAddress)
     {
-        client = new RestClient("https://stores-api.zakaz.ua");
+        HttpClient = new()
+        {
+            BaseAddress = baseAddress
+        };
     }
 
-    public IReadOnlySet<Category>? GetCategories(int storeId)
+    public HttpClientWrapper(string baseAddress) : this(new Uri(baseAddress))
     {
-        return client.GetJson<HashSet<Category>>($"stores/{storeId}/categories");
     }
 
-    public IReadOnlySet<Product>? GetProducts(int storeId, string categoryId)
+    public HttpClientWrapper() : this(DefaultBaseAddress)
     {
-        return client.GetJson<Products>($"stores/{storeId}/categories/{categoryId}/products")?.Results.ToHashSet();
     }
 
-    public IReadOnlySet<Store>? GetStores()
+    public HttpClientWrapper(HttpClient httpClient)
     {
-        return client.GetJson<List<Store>>("stores")?.ToHashSet();
+        HttpClient = httpClient;
+    }
+
+    public Task<IEnumerable<Store>?> GetStoresAsync(
+        CancellationToken cancellationToken = default)
+    {
+        return HttpClient.GetFromJsonAsync<IEnumerable<Store>>(
+            StoresEndpoint, cancellationToken);
+    }
+
+    public Task<IEnumerable<Category>?> GetCategoriesAsync(
+        int storeId, CancellationToken cancellationToken = default)
+    {
+        return HttpClient.GetFromJsonAsync<IEnumerable<Category>>(
+            string.Format(StoreCategoriesEndpoint, storeId), cancellationToken);
+    }
+
+    public Task<Products?> GetProductsAsync(
+        int storeId, string categoryId, CancellationToken cancellationToken = default)
+    {
+        return HttpClient.GetFromJsonAsync<Products>(
+            string.Format(StoreCategoryProductsEndpoint, storeId, categoryId), cancellationToken);
     }
 }
