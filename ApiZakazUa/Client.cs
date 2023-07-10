@@ -10,7 +10,7 @@ public class HttpClientWrapper
 
     public const string StoresEndpoint = "stores";
     public const string StoreCategoriesEndpoint = "stores/{0}/categories";
-    public const string StoreCategoryProductsEndpoint = "stores/{0}/categories/{1}/products";
+    public const string StoreCategoryProductsEndpoint = "stores/{0}/categories/{1}/products?page={2}";
 
     public HttpClient HttpClient { get; set; }
     public Uri? BaseAddress => HttpClient.BaseAddress;
@@ -51,9 +51,9 @@ public class HttpClientWrapper
     }
 
     public Task<Products?> GetProductsAsync(
-        int storeId, string categoryId, CancellationToken cancellationToken = default)
+        int storeId, string categoryId, int page, CancellationToken cancellationToken = default)
     {
         return HttpClient.GetFromJsonAsync<Products>(
-            string.Format(StoreCategoryProductsEndpoint, storeId, categoryId), cancellationToken);
+            string.Format(StoreCategoryProductsEndpoint, storeId, categoryId, page), cancellationToken);
     }
 }

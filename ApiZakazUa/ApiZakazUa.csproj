@@ -10,7 +10,7 @@
     <OutputType>Library</OutputType>
     <TargetFramework>net7.0</TargetFramework>
     <PackageId>ApiZakazUa</PackageId>
-    <Version>2.0.0</Version>
+    <Version>2.0.1</Version>
     <Authors>Qualterz</Authors>
     <PackageDescription>Web API wrapper for Zakaz.ua platform</PackageDescription>
     <RepositoryUrl>https://github.com/qualterz/apizakazua</RepositoryUrl>
